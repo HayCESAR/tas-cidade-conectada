@@ -1,15 +1,5 @@
 # .github/workflows/testes.yml
 # TAS Cidade Conectada · ADS033 · Capítulos 8, 9 e 10
-#
-# LAYOUT NO RUNNER (espelha o layout local exigido pelo README do SUT didático):
-#   $GITHUB_WORKSPACE/
-#   ├── tas/            <- este repositório (tas-cidade-conectada)
-#   └── sut-didatico/   <- segundo checkout, irmão, nunca copiado para dentro da TAS
-#
-# É esse layout que faz `../../../sut-didatico/regras-status`, usado por
-# tests/unidade/status.test.js, resolver sem nenhuma alteração de código.
-#
-# ANTES DO PRIMEIRO PUSH, ajuste a linha marcada com (1).
 
 name: testes
 
@@ -30,12 +20,12 @@ permissions:
   contents: read
 
 env:
-  NODE_VERSION: '22'
-  SUT_REPO: 'HayCESAR/sut-didatico'   # (1) AJUSTAR: owner/repo do SUT didático
+  NODE_VERSION: '24.19.0'
+  SUT_REPO: 'HayCESAR/sut-didatico'
   SUT_REF: 'main'
   PORT: '3000'
   BASE_URL: 'http://localhost:3000'
-  MAESTRO_VERSION: '1.39.0'           # (1) AJUSTAR: confirmar versão corrente
+  MAESTRO_VERSION: '2.9.0'
 
 jobs:
 
