@@ -1,0 +1,17 @@
+url: http://localhost:3000/web
+name: Login com credenciais inválidas
+tags:
+  - smoke
+  - login
+  - negativo
+---
+- launchApp
+- runFlow:
+    file: ../subflows/login.yaml
+    env:
+      EMAIL: ana@exemplo.com
+      SENHA: senhaErrada123
+- assertVisible: "Credenciais invalidas."
+- scroll
+- assertNotVisible:
+    id: "campo-descricao"

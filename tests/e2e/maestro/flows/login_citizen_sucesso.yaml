@@ -1,0 +1,16 @@
+url: http://localhost:3000/web
+name: Login com sucesso
+tags:
+- smoke
+- login
+---
+- launchApp
+- runFlow:
+    file: ../subflows/login.yaml
+    env:
+        EMAIL: "ana@exemplo.com"
+        SENHA: "senha123"
+- assertVisible: "Autenticado .*"
+- scrollUntilVisible:
+    element:
+      id: "campo-descricao"
