@@ -1,0 +1,47 @@
+name: testes
+ 
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+ 
+jobs:
+  api:
+    name: unidade e API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: executa a suite de unidade
+        run: node --test 'tests/unidade/**/*.test.js'
+      - name: sobe o SUT (didatico nos exemplos; backend da squad na sua TAS)
+        run: node sut-didatico/server.js &
+      - name: aguarda o SUT responder
+        run: npx wait-on http://localhost:3000/api/v1/demands --timeout 30000
+      - name: executa a suite de API
+        env:
+          BASE_URL: http://localhost:3000
+        run: node --test 'tests/api/**/*.test.js'
+ 
+  e2e:
+    name: smoke E2E
+    needs: api
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: executa o fluxo E2E
+        run: npm run test:e2e
+      - name: publica evidencias
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-e2e
+          path: |
+            reports/
+            screenshots/
