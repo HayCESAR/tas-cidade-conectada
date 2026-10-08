@@ -22,4 +22,4 @@ tags:
 - tapOn:
     id: "botao-enviar"
 - assertVisible: "Demanda registrada."
-- assertVisible: "Protocolo DEN-.*"
+- assertVisible: "Protocolo DEM-.*"
