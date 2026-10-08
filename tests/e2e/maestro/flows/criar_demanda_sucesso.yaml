@@ -10,9 +10,6 @@ tags:
     env:
       EMAIL: ana@exemplo.com
       SENHA: senha123
-- scrollUntilVisible:
-    element:
-      id: "campo-descricao"
 - tapOn:
     id: "campo-descricao"
 - inputText: "Buraco grande na pista sentido bairro Macaxeira, proximo ao numero 450."
